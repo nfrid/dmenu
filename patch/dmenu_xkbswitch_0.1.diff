@@ -1,0 +1,20 @@
+diff --git a/dmenu.c b/dmenu.c
+index b48ca51..cd556f4 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -544,7 +544,14 @@ keypress(XKeyEvent *ev)
+ 		default:
+ 			return;
+ 		}
+-	}
++	} else if (ev->state & Mod4Mask) {
++    switch(ksym){
++    case XK_space:
++      system("xkb-switch -n");
++    default:
++      return;
++    }
++  }
+ 
+ 	switch(ksym) {
+ 	default:

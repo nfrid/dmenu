@@ -544,7 +544,14 @@ keypress(XKeyEvent *ev)
 		default:
 			return;
 		}
-	}
+	} else if (ev->state & Mod4Mask) {
+    switch(ksym){
+    case XK_space:
+      system("xkb-switch -n");
+    default:
+      return;
+    }
+  }
 
 	switch(ksym) {
 	default:
