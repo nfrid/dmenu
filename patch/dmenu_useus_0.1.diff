@@ -6,7 +6,7 @@ index cd556f4..9c915fc 100644
  static Drw *drw;
  static Clr *scheme[SchemeLast];
  
-+char layout[100];
++static char layout[100];
 +
  #include "config.h"
  

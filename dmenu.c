@@ -60,7 +60,7 @@ static XIC xic;
 static Drw *drw;
 static Clr *scheme[SchemeLast];
 
-char layout[100];
+static char layout[100];
 
 #include "config.h"
 
