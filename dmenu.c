@@ -932,6 +932,10 @@ int main(int argc, char* argv[]) {
       colors[SchemeSelHighlight][ColFg] = argv[++i];
     else if (!strcmp(argv[i], "-w")) /* embedding window id */
       embed = argv[++i];
+
+    else if (!strcmp(argv[i], "-i")) // ignore -i for the scripts
+      ;
+
     else
       usage();
 
