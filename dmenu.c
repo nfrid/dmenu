@@ -264,7 +264,7 @@ static void grabkeyboard(void) {
     return;
   /* try to grab keyboard, we may have to wait for another process to ungrab */
   for (i = 0; i < 1000; i++) {
-    if (XGrabKeyboard(dpy, DefaultRootWindow(dpy), True, GrabModeAsync,
+    if (XGrabKeyboard(dpy, DefaultRootWindow(dpy), 1, GrabModeAsync,
             GrabModeAsync, CurrentTime)
         == GrabSuccess)
       return;
@@ -829,7 +829,7 @@ static void setup(void) {
   match();
 
   /* create menu window */
-  swa.override_redirect = True;
+  swa.override_redirect = 1;
   swa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
   swa.event_mask        = ExposureMask | KeyPressMask | VisibilityChangeMask;
   win                   = XCreateWindow(dpy, parentwin, x, y, mw, mh, 0,

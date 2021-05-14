@@ -1,4 +1,6 @@
-gcc -std=gnu99 -pedantic -Wall -Os
+gcc
 %h -x c++-header
-%c --include=dmenu.c
-%c --include=drw.h
+%c -Idmenu.c
+%c -Idrw.h
+%c -I/usr/X11R6/include
+%c -I/usr/include/freetype2
