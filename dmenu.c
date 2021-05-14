@@ -1,4 +1,11 @@
-/* See LICENSE file for copyright and license details. */
+/* ye i did a little funny here
+ * not true suckless cuz they actually suck
+ * figure it out if have enough idk will power?
+ *
+ * can answer questions when in good mood
+ * Nick Friday <nfriday@ya.ru>
+ */
+
 #include <ctype.h>
 #include <locale.h>
 #include <math.h>
@@ -71,8 +78,7 @@ static char* cistrstr(const char* s, const char* sub);
 static int (*fstrncmp)(const char*, const char*, size_t) = strncasecmp;
 static char* (*fstrstr)(const char*, const char*)        = cistrstr;
 
-static void
-appenditem(struct item* item, struct item** list, struct item** last) {
+static void appenditem(struct item* item, struct item** list, struct item** last) {
   if (*last)
     (*last)->right = item;
   else
@@ -83,8 +89,7 @@ appenditem(struct item* item, struct item** list, struct item** last) {
   *last       = item;
 }
 
-static void
-calcoffsets(void) {
+static void calcoffsets(void) {
   int i, n;
 
   if (lines > 0)
@@ -100,8 +105,7 @@ calcoffsets(void) {
       break;
 }
 
-static void
-cleanup(void) {
+static void cleanup(void) {
   size_t i;
 
   XUngrabKey(dpy, AnyKey, AnyModifier, root);
@@ -116,8 +120,7 @@ cleanup(void) {
   system(switchbackC);
 }
 
-static char*
-cistrstr(const char* s, const char* sub) {
+static char* cistrstr(const char* s, const char* sub) {
   size_t len;
 
   for (len = strlen(sub); *s; s++)
@@ -126,8 +129,7 @@ cistrstr(const char* s, const char* sub) {
   return NULL;
 }
 
-static void
-drawhighlights(struct item* item, int x, int y, int maxw) {
+static void drawhighlights(struct item* item, int x, int y, int maxw) {
   int   i, indent;
   char* highlight;
   char  c;
@@ -162,8 +164,7 @@ drawhighlights(struct item* item, int x, int y, int maxw) {
   }
 }
 
-static int
-drawitem(struct item* item, int x, int y, int w) {
+static int drawitem(struct item* item, int x, int y, int w) {
   int r;
   if (item == sel)
     drw_setscheme(drw, scheme[SchemeSel]);
@@ -177,8 +178,7 @@ drawitem(struct item* item, int x, int y, int w) {
   return r;
 }
 
-static void
-recalculatenumbers() {
+static void recalculatenumbers() {
   unsigned int numer = 0, denom = 0;
   struct item* item;
   if (matchend) {
@@ -191,8 +191,7 @@ recalculatenumbers() {
   snprintf(numbers, NUMBERSBUFSIZE, "%d/%d", numer, denom);
 }
 
-static void
-drawmenu(void) {
+static void drawmenu(void) {
   unsigned int curpos;
   struct item* item;
   int          x = 0, y = 0, fh = drw->fonts->h, w;
@@ -242,8 +241,7 @@ drawmenu(void) {
   drw_map(drw, win, 0, 0, mw, mh);
 }
 
-static void
-grabfocus(void) {
+static void grabfocus(void) {
   struct timespec ts = { .tv_sec = 0, .tv_nsec = 10000000 };
   Window          focuswin;
   int             i, revertwin;
@@ -258,8 +256,7 @@ grabfocus(void) {
   die("cannot grab focus");
 }
 
-static void
-grabkeyboard(void) {
+static void grabkeyboard(void) {
   struct timespec ts = { .tv_sec = 0, .tv_nsec = 1000000 };
   int             i;
 
@@ -353,8 +350,7 @@ void fuzzymatch(void) {
   calcoffsets();
 }
 
-static void
-match(void) {
+static void match(void) {
   if (fuzzy) {
     fuzzymatch();
     return;
@@ -410,8 +406,7 @@ match(void) {
   calcoffsets();
 }
 
-static void
-insert(const char* str, ssize_t n) {
+static void insert(const char* str, ssize_t n) {
   if (strlen(text) + n > sizeof text - 1)
     return;
   /* move existing text out of the way, insert new text, and update cursor */
@@ -422,8 +417,7 @@ insert(const char* str, ssize_t n) {
   match();
 }
 
-static size_t
-nextrune(int inc) {
+static size_t nextrune(int inc) {
   ssize_t n;
 
   /* return location of next utf8 rune in the given direction (+1 or -1) */
@@ -432,8 +426,7 @@ nextrune(int inc) {
   return n;
 }
 
-static void
-movewordedge(int dir) {
+static void movewordedge(int dir) {
   if (dir < 0) { /* move cursor to the start of the word*/
     while (cursor > 0 && strchr(worddelimiters, text[nextrune(-1)]))
       cursor = nextrune(-1);
@@ -447,8 +440,7 @@ movewordedge(int dir) {
   }
 }
 
-static void
-keypress(XKeyEvent* ev) {
+static void keypress(XKeyEvent* ev) {
   char   buf[32];
   int    len;
   KeySym ksym;
@@ -686,8 +678,7 @@ draw:
   drawmenu();
 }
 
-static void
-paste(void) {
+static void paste(void) {
   char *        p, *q;
   int           di;
   unsigned long dl;
@@ -704,8 +695,7 @@ paste(void) {
   drawmenu();
 }
 
-static void
-readstdin(void) {
+static void readstdin(void) {
   char         buf[sizeof text], *p;
   size_t       i, imax = 0, size = 0;
   unsigned int tmpmax = 0;
@@ -732,8 +722,7 @@ readstdin(void) {
   lines  = MIN(lines, i);
 }
 
-static void
-run(void) {
+static void run(void) {
   XEvent ev;
   system("xkb-switch -s us");
 
@@ -770,8 +759,7 @@ run(void) {
   }
 }
 
-static void
-setup(void) {
+static void setup(void) {
   int                  x, y, i, j;
   unsigned int         du;
   XSetWindowAttributes swa;
@@ -870,11 +858,9 @@ setup(void) {
   drawmenu();
 }
 
-static void
-usage(void) {
-  fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
-        "             [-nb color] [-nf color] [-sb color] [-sf color]\n"
-        "             [-nhb color] [-nhf color] [-shb color] [-shf color] [-w windowid]\n",
+static void usage(void) {
+  fputs("usage: dmenu [flags]\n"
+        "wanna more? no. read code.\n",
       stderr);
   exit(1);
 }
