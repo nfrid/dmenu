@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "xft.h": "c",
+    "*.ipp": "cpp",
+    "iosfwd": "cpp",
+    "iostream": "cpp",
+    "*.tcc": "cpp",
+    "chrono": "cpp",
+    "ratio": "cpp"
+  }
+}

@@ -889,7 +889,7 @@ int main(int argc, char* argv[]) {
   for (i = 1; i < argc; i++)
     /* these options take no arguments */
     if (!strcmp(argv[i], "-v")) { /* prints version information */
-      puts("dmenu-" VERSION);
+      puts("dmenu-nf (5.0 based)");
       exit(0);
     } else if (!strcmp(argv[i], "-b")) /* appears at the bottom of the screen */
       topbar = 0;
