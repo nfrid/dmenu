@@ -319,7 +319,7 @@ void fuzzymatch(void) {
       if (eidx != -1) {
         /* compute distance */
         /* add penalty if match starts late (log(sidx+2))
-				 * add penalty for long a match without many matching characters */
+         * add penalty for long a match without many matching characters */
         it->distance = log(sidx + 2) + (double)(eidx - sidx - text_len);
         /* fprintf(stderr, "distance %s %f\n", it->text, it->distance); */
         appenditem(it, &matches, &matchend);
@@ -487,6 +487,8 @@ static void keypress(XKeyEvent* ev) {
       ksym = XK_Tab;
       break;
     case XK_j: /* fallthrough */
+      ksym = XK_Down;
+      break;
     case XK_J: /* fallthrough */
     case XK_m: /* fallthrough */
     case XK_M:
@@ -500,9 +502,10 @@ static void keypress(XKeyEvent* ev) {
       ksym = XK_Up;
       break;
 
-    case XK_k: /* delete right */
-      text[cursor] = '\0';
-      match();
+    case XK_k:
+      ksym = XK_Up;
+      /* text[cursor] = '\0'; */
+      /* match(); */
       break;
     case XK_u: /* delete left */
       insert(NULL, 0 - cursor);
@@ -547,17 +550,17 @@ static void keypress(XKeyEvent* ev) {
     case XK_G:
       ksym = XK_End;
       break;
-    case XK_h:
-      ksym = XK_Prior;
-      break;
     case XK_j:
-      ksym = XK_Down;
+      ksym = XK_Next;
       break;
     case XK_k:
-      ksym = XK_Up;
+      ksym = XK_Prior;
       break;
     case XK_l:
       ksym = XK_Next;
+      break;
+    case XK_h:
+      ksym = XK_Prior;
       break;
     default:
       return;
